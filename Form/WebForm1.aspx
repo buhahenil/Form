@@ -68,7 +68,7 @@
             <tr>
                 <td>State</td>
                 <td>
-                    <asp:DropDownList ID="ddlState" runat="server" Autopostbac="true" OnSelectedIndexChanged="ddlState_SelectedIndexChanged1">
+                    <asp:DropDownList ID="ddlState" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlState_SelectedIndexChanged1">
                         <asp:ListItem Value="0">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
