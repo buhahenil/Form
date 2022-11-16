@@ -49,7 +49,7 @@
 
             <tr>
                 <td>
-                    <asp:Label ID="lblAddress" runat="server" Text="Address" meta:resourcekey="Label5Resource1"></asp:Label>
+                    <asp:Label ID="lblAddress" runat="server" Text="Address"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
@@ -59,8 +59,8 @@
             <tr>
                 <td>Country</td>
                 <td>
-                    <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="Country_SelectedIndexChanged">
-                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>  
+                    <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged1" DataTextField="CountryName" DataValueField="CountryId">
+                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
             </tr>
@@ -68,8 +68,8 @@
             <tr>
                 <td>State</td>
                 <td>
-                    <asp:DropDownList ID="ddlState" runat="server" OnSelectedIndexChanged="State_SelectedIndexChanged">
-                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>  
+                    <asp:DropDownList ID="ddlState" runat="server" Autopostbac="true" OnSelectedIndexChanged="ddlState_SelectedIndexChanged1">
+                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
             </tr>
@@ -77,8 +77,8 @@
             <tr>
                 <td>City</td>
                 <td>
-                    <asp:DropDownList ID="ddlCity" runat="server" OnSelectedIndexChanged="City_SelectedIndexChanged">
-                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>  
+                    <asp:DropDownList ID="ddlCity" runat="server" Autopostbac="true">
+                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
             </tr>

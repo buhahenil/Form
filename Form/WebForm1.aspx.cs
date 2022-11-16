@@ -12,14 +12,17 @@ namespace Form
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private string con = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
-
+        private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
+        private object txtCunrtyId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 btnSubmit.Enabled = true;
+                bindCountry();
+                ddlState.Enabled = false;
+                ddlCity.Enabled = false;
             }
         }
         //first name 
@@ -48,48 +51,70 @@ namespace Form
 
         }
 
-        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+        public void bindCountry()
         {
-            if (!Page.IsPostBack)
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("spGetCountry", con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            ddlCountry.DataSource = dt;
+            ddlCountry.DataValueField = "CountryId";
+            ddlCountry.DataTextField = "CountryName";
+            ddlCountry.DataBind();
+            ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+        }
+
+        protected void ddlCountry_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            if (ddlCountry.SelectedValue != "0")
             {
-                SqlConnection con = new SqlConnection(@"Data Source =.; Initial Catalog = Henil; Integrated Security = True");
-                SqlCommand cmd = new SqlCommand("select * from tblCountry", con);
+                SqlConnection con = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("spGetStateByCountry", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                cmd.CommandType = CommandType.StoredProcedure;
                 DataTable dt = new DataTable();
+                cmd.Parameters.AddWithValue("@CountryId", ddlCountry.SelectedItem.Value);
                 sda.Fill(dt);
                 ddlState.DataSource = dt;
+                ddlState.DataValueField = "StateId";
+                ddlState.DataTextField = "StateName";
                 ddlState.DataBind();
-
+                ddlState.Items.Insert(0, new ListItem("Select State", "0"));
+                ddlState.Enabled = true;
+            }
+            else
+            {
+                ddlState.Enabled = false;
+                ddlState.SelectedValue = "0";
             }
         }
 
-        protected void ddlState_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlState_SelectedIndexChanged1(object sender, EventArgs e)
         {
-            ddlState.Items.Clear();
-            ddlState.Items.Add("Select State");
-
-            SqlConnection con = new SqlConnection(@"Data Source =.; Initial Catalog = Henil; Integrated Security = True");
-            SqlCommand cmd = new SqlCommand("select * from tblState where CountryId=" + ddlState.SelectedItem.Value, con);
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            ddlCity.DataSource = dt;
-            ddlCity.DataBind();
-        }
-
-        protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)    
-        {
-            ddlCity.Items.Clear();
-            ddlCity.Items.Add("Select State");
-
-            SqlConnection con = new SqlConnection(@"Data Source=.;Initial Catalog=Henil;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("select * from tblCity where StateId=" + ddlCity.SelectedItem.Value, con);
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            ddlCity.DataSource = dt;
-            ddlCity.DataBind();
+            if (ddlState.SelectedValue != "0")
+            {
+                SqlConnection con = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("spGetCityByStateId", con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                cmd.CommandType = CommandType.StoredProcedure;
+                DataTable dt = new DataTable();
+                cmd.Parameters.AddWithValue("@RC", ddlState.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@StateId", ddlState.SelectedItem.Value);
+                sda.Fill(dt);
+                ddlCity.DataSource = dt;
+                ddlCity.DataValueField = "CountryId";
+                ddlCity.DataTextField = "CountryName";
+                ddlCity.DataBind();
+                ddlCity.Items.Insert(0, new ListItem("Select City", "0"));
+                ddlCity.Enabled = true;
+            }
+            else
+            {
+                ddlCity.Enabled = false;
+                ddlCity.SelectedValue = "0";
+            }
         }
 
         protected void txtPincode_TextChanged(object sender, EventArgs e)
@@ -104,7 +129,7 @@ namespace Form
 
         protected void rblGender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //txtGender.Text = rblGender.SelectedValue;
+
         }
 
         protected void cblHobbies_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,8 +150,7 @@ namespace Form
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            SqlConnection db = new SqlConnection(con);
-            
+            SqlConnection db = new SqlConnection(connectionString);
             string insert = "sppersonCrud";
             db.Open();
             SqlCommand cmd = new SqlCommand(insert, db);
@@ -135,9 +159,9 @@ namespace Form
             cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
             cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
             cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-            cmd.Parameters.AddWithValue("@Country",ddlCountry.DataSource);
-            cmd.Parameters.AddWithValue("@State",ddlState.DataSource);
-            cmd.Parameters.AddWithValue("@City", ddlCity.DataSource);
+            cmd.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
+            cmd.Parameters.AddWithValue("@State", ddlState.SelectedValue);
+            cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
             cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
             cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedValue);
