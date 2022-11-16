@@ -100,12 +100,11 @@ namespace Form
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 cmd.CommandType = CommandType.StoredProcedure;
                 DataTable dt = new DataTable();
-                cmd.Parameters.AddWithValue("@RC", ddlState.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@StateId", ddlState.SelectedItem.Value);
                 sda.Fill(dt);
                 ddlCity.DataSource = dt;
-                ddlCity.DataValueField = "CountryId";
-                ddlCity.DataTextField = "CountryName";
+                ddlCity.DataValueField = "CityId";
+                ddlCity.DataTextField = "CityName";
                 ddlCity.DataBind();
                 ddlCity.Items.Insert(0, new ListItem("Select City", "0"));
                 ddlCity.Enabled = true;
