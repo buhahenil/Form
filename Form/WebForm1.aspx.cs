@@ -13,7 +13,7 @@ namespace Form
     public partial class WebForm1 : System.Web.UI.Page
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
-        private object txtCunrtyId;
+        //private object txtCunrtyId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -163,7 +163,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
             cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
-            cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedValue);
+            cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
