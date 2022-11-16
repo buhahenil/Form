@@ -52,7 +52,7 @@ namespace Form
         {
             if (!Page.IsPostBack)
             {
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
+                SqlConnection con = new SqlConnection(@"Data Source =.; Initial Catalog = Henil; Integrated Security = True");
                 SqlCommand cmd = new SqlCommand("select * from tblCountry", con);
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -68,7 +68,7 @@ namespace Form
             ddlState.Items.Clear();
             ddlState.Items.Add("Select State");
 
-            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
+            SqlConnection con = new SqlConnection(@"Data Source =.; Initial Catalog = Henil; Integrated Security = True");
             SqlCommand cmd = new SqlCommand("select * from tblState where CountryId=" + ddlState.SelectedItem.Value, con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -82,7 +82,7 @@ namespace Form
             ddlCity.Items.Clear();
             ddlCity.Items.Add("Select State");
 
-            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
+            SqlConnection con = new SqlConnection(@"Data Source=.;Initial Catalog=Henil;Integrated Security=True");
             SqlCommand cmd = new SqlCommand("select * from tblCity where StateId=" + ddlCity.SelectedItem.Value, con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
