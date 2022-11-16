@@ -13,7 +13,7 @@
         <table border="1">
             <tr>
                 <td>
-                    <asp:Label ID="Label1" runat="server" Text="First Name"></asp:Label>
+                    <asp:Label ID="lblFirstName" runat="server" Text="First Name"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
@@ -22,7 +22,7 @@
 
             <tr>
                 <td>
-                    <asp:Label ID="Label2" runat="server" Text="Middle Name"></asp:Label>
+                    <asp:Label ID="lblMidd" runat="server" Text="Middle Name"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="txtMiddleName" runat="server"></asp:TextBox>
@@ -31,7 +31,7 @@
 
             <tr>
                 <td>
-                    <asp:Label ID="Label3" runat="server" Text="Last Name"></asp:Label>
+                    <asp:Label ID="lblLastName" runat="server" Text="Last Name"></asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
@@ -57,34 +57,28 @@
             </tr>
 
             <tr>
-                <td>Country
-                </td>
+                <td>Country</td>
                 <td>
-                    <asp:DropDownList ID="Country" runat="server" Width="134px" OnSelectedIndexChanged="Country_SelectedIndexChanged">
-                        <asp:ListItem>India</asp:ListItem>
-                        <asp:ListItem>UK</asp:ListItem>
+                    <asp:DropDownList ID="ddlCountry" runat="server" OnSelectedIndexChanged="Country_SelectedIndexChanged">
+                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>  
                     </asp:DropDownList>
                 </td>
             </tr>
 
             <tr>
-                <td>State
-                </td>
+                <td>State</td>
                 <td>
-                    <asp:DropDownList ID="State" runat="server" Width="134px" OnSelectedIndexChanged="State_SelectedIndexChanged">
-                        <asp:ListItem>Gujarat</asp:ListItem>
-                        <asp:ListItem>Panjab</asp:ListItem>
+                    <asp:DropDownList ID="ddlState" runat="server" OnSelectedIndexChanged="State_SelectedIndexChanged">
+                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>  
                     </asp:DropDownList>
                 </td>
             </tr>
 
             <tr>
-                <td>City
-                </td>
+                <td>City</td>
                 <td>
-                    <asp:DropDownList ID="City" runat="server" Width="134px" OnSelectedIndexChanged="City_SelectedIndexChanged">
-                        <asp:ListItem>Ahmedabad</asp:ListItem>
-                        <asp:ListItem>Surat</asp:ListItem>
+                    <asp:DropDownList ID="ddlCity" runat="server" OnSelectedIndexChanged="City_SelectedIndexChanged">
+                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>  
                     </asp:DropDownList>
                 </td>
             </tr>

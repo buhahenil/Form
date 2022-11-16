@@ -48,19 +48,48 @@ namespace Form
 
         }
 
-        protected void Country_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
+                SqlCommand cmd = new SqlCommand("select * from tblCountry", con);
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                ddlState.DataSource = dt;
+                ddlState.DataBind();
 
+            }
         }
 
-        protected void State_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlState_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlState.Items.Clear();
+            ddlState.Items.Add("Select State");
 
+            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
+            SqlCommand cmd = new SqlCommand("select * from tblState where CountryId=" + ddlState.SelectedItem.Value, con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            ddlCity.DataSource = dt;
+            ddlCity.DataBind();
         }
 
-        protected void City_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)    
         {
+            ddlCity.Items.Clear();
+            ddlCity.Items.Add("Select State");
 
+            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
+            SqlCommand cmd = new SqlCommand("select * from tblCity where StateId=" + ddlCity.SelectedItem.Value, con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+
+            ddlCity.DataSource = dt;
+            ddlCity.DataBind();
         }
 
         protected void txtPincode_TextChanged(object sender, EventArgs e)
@@ -97,6 +126,7 @@ namespace Form
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             SqlConnection db = new SqlConnection(con);
+            
             string insert = "sppersonCrud";
             db.Open();
             SqlCommand cmd = new SqlCommand(insert, db);
@@ -105,9 +135,9 @@ namespace Form
             cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
             cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
             cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-            //cmd.Parameters.AddWithValue("@Country", "txtLastName");
-            //cmd.Parameters.AddWithValue("@", "txtLastName");
-            //cmd.Parameters.AddWithValue("@", "txtLastName");
+            cmd.Parameters.AddWithValue("@Country",ddlCountry.DataSource);
+            cmd.Parameters.AddWithValue("@State",ddlState.DataSource);
+            cmd.Parameters.AddWithValue("@City", ddlCity.DataSource);
             cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
             cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedValue);
