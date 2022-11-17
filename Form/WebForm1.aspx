@@ -172,14 +172,13 @@
             <tr>
                 <td colspan="2">
                     <asp:CheckBox ID="chkIsTermsAccept" runat="server" Text="I Agree with this from" OnCheckedChanged="chkIsTermsAccept_CheckedChanged" 
-                        ValidationGroup="LoginFrame"AutoPostBack="true" />
+                        AutoPostBack="true" />
                 </td>
             </tr>
 
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
-                    <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" ValidationGroup="LoginFrame"/>
-                    <%--<asp:Button ID="Button1" runat="server" Text="Edit" OnClick="btnEdit_Click" Style="height: 26px" />--%>
+                    <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" ValidationGroup="LoginFrame" /> 
                 </td>
             </tr>
               

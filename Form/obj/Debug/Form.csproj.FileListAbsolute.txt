@@ -29,7 +29,6 @@ D:\buhahenil\Form\Form\bin\roslyn\VBCSCompiler.exe
 D:\buhahenil\Form\Form\bin\roslyn\VBCSCompiler.exe.config
 D:\buhahenil\Form\Form\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\buhahenil\Form\Form\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\buhahenil\Form\Form\obj\Debug\Form.csproj.AssemblyReference.cache
 D:\buhahenil\Form\Form\obj\Debug\Form.csproj.CoreCompileInputs.cache
 D:\buhahenil\Form\Form\obj\Debug\Form.csproj.CopyComplete
 D:\buhahenil\Form\Form\obj\Debug\Form.dll
