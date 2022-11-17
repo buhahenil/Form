@@ -16,7 +16,15 @@
                     <asp:Label ID="lblFirstName" runat="server" Text="First Name"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFirstName" runat="server" ValidationGroup="LoginFrame"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="reqFirstName" ControlToValidate="txtFirstName" Display="Dynamic" ValidationGroup="LoginFrame" 
+                        runat="server" ErrorMessage="Enter Fname" ></asp:RequiredFieldValidator>
+                </td>
+                <td>
+                    <asp:RegularExpressionValidator ID="revFirstName" ValidationGroup="LoginFrame" Display="Dynamic" ValidationExpression="(^[A-Z a-z]*$)" 
+                        ControlToValidate="txtFirstName" runat="server" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -25,16 +33,21 @@
                     <asp:Label ID="lblMidd" runat="server" Text="Middle Name"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtMiddleName" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtMiddleName" runat="server" ></asp:TextBox>
                 </td>
             </tr>
+
 
             <tr>
                 <td>
                     <asp:Label ID="lblLastName" runat="server" Text="Last Name"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtLastName" runat="server" ValidationGroup="LoginFrame"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqLastName" ControlToValidate="txtLastName" Display="Dynamic" ValidationGroup="LoginFrame" 
+                        runat="server" ErrorMessage="Enter Lastname" ></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -43,7 +56,11 @@
                     <asp:Label ID="lblMobileNumber" runat="server" Text="Mobile Number"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged"></asp:TextBox><br />
+                    <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged" ValidationGroup="LoginFrame"></asp:TextBox><br />
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqMoblieNumber" ControlToValidate="txtMoblieNumber" Display="Dynamic" ValidationGroup="LoginFrame" 
+                        runat="server" ErrorMessage="Enter MoblieNumber" ></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -52,7 +69,11 @@
                     <asp:Label ID="lblAddress" runat="server" Text="Address"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" ValidationGroup="LoginFrame"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqAddress" ControlToValidate="txtAddress" Display="Dynamic" ValidationGroup="LoginFrame" 
+                        runat="server" ErrorMessage="Enter Address" ></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -60,9 +81,14 @@
                 <td>Country</td>
                 <td>
                     <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged1" DataTextField="CountryName" DataValueField="CountryId">
-                        <asp:ListItem Value="0">--Select Country--</asp:ListItem>
+                        <asp:ListItem Value="0" ValidationGroup="LoginFrame">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
+                <td>
+                  <asp:RequiredFieldValidator ID="ReqCountry" ControlToValidate="ddlCountry" ValidationGroup="LoginFrame" InitialValue="0" 
+                        runat="server" ErrorMessage="Select Country" enabled="true" Display="Dynamic" ></asp:RequiredFieldValidator>
+                </td>
+
             </tr>
 
             <tr>
@@ -72,14 +98,22 @@
                         <asp:ListItem Value="0">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqState" ControlToValidate="ddlState" ValidationGroup="LoginFrame" InitialValue="0" 
+                        runat="server" ErrorMessage="Select State" enabled="true" Display="Dynamic" ></asp:RequiredFieldValidator>
+                </td>
             </tr>
 
             <tr>
                 <td>City</td>
                 <td>
-                    <asp:DropDownList ID="ddlCity" runat="server" Autopostbac="true">
+                    <asp:DropDownList ID="ddlCity" runat="server" AutoPostBack="true">
                         <asp:ListItem Value="0">--Select Country--</asp:ListItem>
                     </asp:DropDownList>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqCity" ControlToValidate="ddlCity" ValidationGroup="LoginFrame" InitialValue="0" 
+                        runat="server" ErrorMessage="Select City" enabled="true" Display="Dynamic" ></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -97,7 +131,11 @@
                     <asp:Label ID="lblDate" runat="server" Text="Date Of Brith"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtDate" runat="server" placeholder="mm/dd/yyyy" TextMode="Date" ReadOnly="false" OnTextChanged="txtDate_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtDate" runat="server" placeholder="mm/dd/yyyy" TextMode="Date" ReadOnly="false" ValidationGroup="LoginFrame" OnTextChanged="txtDate_TextChanged"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqDate" ControlToValidate="txtDate" Display="Dynamic" ValidationGroup="LoginFrame" 
+                        runat="server" ErrorMessage="Enter Date" ></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -133,16 +171,18 @@
 
             <tr>
                 <td colspan="2">
-                    <asp:CheckBox ID="chkIsTermsAccept" runat="server" Text="I Agree with this from" OnCheckedChanged="chkIsTermsAccept_CheckedChanged" AutoPostBack="true" />
+                    <asp:CheckBox ID="chkIsTermsAccept" runat="server" Text="I Agree with this from" OnCheckedChanged="chkIsTermsAccept_CheckedChanged" 
+                        ValidationGroup="LoginFrame"AutoPostBack="true" />
                 </td>
-
             </tr>
 
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
-                    <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" ValidationGroup="LoginFrame"/>
+                    <%--<asp:Button ID="Button1" runat="server" Text="Edit" OnClick="btnEdit_Click" Style="height: 26px" />--%>
                 </td>
             </tr>
+              
         </table>
     </form>
 </body>

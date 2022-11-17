@@ -42,6 +42,24 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
 
         /// <summary>
+        /// reqFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFirstName;
+
+        /// <summary>
+        /// revFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFirstName;
+
+        /// <summary>
         /// lblMidd control.
         /// </summary>
         /// <remarks>
@@ -78,6 +96,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
 
         /// <summary>
+        /// ReqLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqLastName;
+
+        /// <summary>
         /// lblMobileNumber control.
         /// </summary>
         /// <remarks>
@@ -94,6 +121,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMoblieNumber;
+
+        /// <summary>
+        /// ReqMoblieNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqMoblieNumber;
 
         /// <summary>
         /// lblAddress control.
@@ -114,6 +150,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
 
         /// <summary>
+        /// ReqAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqAddress;
+
+        /// <summary>
         /// ddlCountry control.
         /// </summary>
         /// <remarks>
@@ -121,6 +166,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
+
+        /// <summary>
+        /// ReqCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqCountry;
 
         /// <summary>
         /// ddlState control.
@@ -132,6 +186,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.DropDownList ddlState;
 
         /// <summary>
+        /// ReqState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqState;
+
+        /// <summary>
         /// ddlCity control.
         /// </summary>
         /// <remarks>
@@ -139,6 +202,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCity;
+
+        /// <summary>
+        /// ReqCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqCity;
 
         /// <summary>
         /// lblPincode control.
@@ -177,6 +249,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtDate;
 
         /// <summary>
+        /// ReqDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqDate;
+
+        /// <summary>
         /// lblGender control.
         /// </summary>
         /// <remarks>
@@ -211,15 +292,6 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblHobbies;
-
-        /// <summary>
-        /// chkIsTermsAccept control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsTermsAccept;
 
         /// <summary>
         /// btnSubmit control.
