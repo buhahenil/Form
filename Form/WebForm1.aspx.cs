@@ -170,11 +170,8 @@ namespace Form
 
             cmd.ExecuteNonQuery();
             db.Close();
-        }
 
-        protected void btnEdit_Click(object sender, EventArgs e)
-        {
-
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
     }
 }
