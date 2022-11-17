@@ -83,6 +83,7 @@ namespace Form
                 ddlState.DataBind();
                 ddlState.Items.Insert(0, new ListItem("Select State", "0"));
                 ddlState.Enabled = true;
+                
             }
             else
             {
@@ -108,6 +109,7 @@ namespace Form
                 ddlCity.DataBind();
                 ddlCity.Items.Insert(0, new ListItem("Select City", "0"));
                 ddlCity.Enabled = true;
+                
             }
             else
             {
