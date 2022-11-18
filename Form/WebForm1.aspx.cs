@@ -64,8 +64,9 @@ namespace Form
             ddlCountry.DataTextField = "CountryName";
             ddlCountry.DataBind();
             ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
+            
         }
-
+        
         protected void ddlCountry_SelectedIndexChanged1(object sender, EventArgs e)
         {
             if (ddlCountry.SelectedValue != "0")
@@ -83,12 +84,15 @@ namespace Form
                 ddlState.DataBind();
                 ddlState.Items.Insert(0, new ListItem("Select State", "0"));
                 ddlState.Enabled = true;
+                ddlCity.Items.Clear();
                 
             }
             else
             {
                 ddlState.Enabled = false;
                 ddlState.SelectedValue = "0";
+                ddlCity.Enabled = false;
+                ddlCity.SelectedValue = "0";
             }
         }
 
