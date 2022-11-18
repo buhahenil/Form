@@ -21,6 +21,7 @@ namespace Form
             {
                 btnSubmit.Enabled = true;
                 bindCountry();
+                
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
             }
@@ -178,6 +179,19 @@ namespace Form
             db.Close();
 
             Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
+        protected void lnkEdit_Click(object sender, EventArgs e)
+        {
+            SqlConnection db = new SqlConnection(connectionString);
+            string insert = "sppersonSelected";
+            db.Open();
+            SqlCommand cmd = new SqlCommand(s, db);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            gvDataDisplay.DataSource = sda;
+            gvDataDisplay.DataBind();
         }
     }
 }

@@ -181,8 +181,34 @@
                     <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" ValidationGroup="LoginFrame" /> 
                 </td>
             </tr>
-              
+        </table> <br/><br/>     
+    
+        <table>
+            
+                 <asp:GridView ID="gvDataDisplay" runat="server" AutoGenerateColumns="False" DataKeyNames="FirstName">
+                    <Columns>
+                        <asp:BoundField DataField="FirstName" HeaderText="FirstName"/>
+                        <asp:BoundField DataField="MiddleName" HeaderText="MiddleName"/>
+                        <asp:BoundField DataField="LastName" HeaderText="LastName"/>
+                        <asp:BoundField DataField="MoblieNumber" HeaderText="MoblieNumber"/>
+                        <asp:BoundField DataField="Address" HeaderText="Address"/>
+                        <asp:BoundField DataField="Country" HeaderText="Country"/>
+                        <asp:BoundField DataField="State" HeaderText="State"/>
+                        <asp:BoundField DataField="City" HeaderText="City"/>
+                        <asp:BoundField DataField="Pincode" HeaderText="Pincode"/>
+                        <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith"/>
+                        <asp:BoundField DataField="Gendar" HeaderText="Gendar"/>
+                        <asp:BoundField DataField="Hobbies" HeaderText="Hobbies"/>
+                
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkEdit" Text="Edit" runat="server" CommandArgument='<%# Eval("FirstName")%>' OnClick="lnkEdit_Click"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                  </Columns>
+                 </asp:GridView>
+            
         </table>
-    </form>
+    </form>    
 </body>
 </html>
