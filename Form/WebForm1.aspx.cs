@@ -21,11 +21,15 @@ namespace Form
             {
                 btnSubmit.Enabled = true;
                 bindCountry();
-                
+                DataDisplay();
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
+                
             }
         }
+
+        
+
         //first name 
         protected void txtFirstName_TextChanged(object sender, EventArgs e)
         {
@@ -180,18 +184,18 @@ namespace Form
 
             Response.Redirect(Request.Url.AbsoluteUri);
         }
-
-        protected void lnkEdit_Click(object sender, EventArgs e)
+        private void DataDisplay()
         {
-            SqlConnection db = new SqlConnection(connectionString);
-            string insert = "sppersonSelected";
-            db.Open();
-            SqlCommand cmd = new SqlCommand(s, db);
+            SqlConnection con = new SqlConnection(connectionString);
+            string select = "sppersonSelected";
+            SqlCommand cmd = new SqlCommand(select, con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
+            con.Open();
             sda.Fill(dt);
-            gvDataDisplay.DataSource = sda;
-            gvDataDisplay.DataBind();
+            grvDataDisplay.DataSource = dt;
+            grvDataDisplay.DataBind();
+
         }
     }
 }
