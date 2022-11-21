@@ -24,11 +24,11 @@ namespace Form
                 DataDisplay();
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
-                
+
             }
         }
 
-        
+
 
         //first name 
         protected void txtFirstName_TextChanged(object sender, EventArgs e)
@@ -69,9 +69,9 @@ namespace Form
             ddlCountry.DataTextField = "CountryName";
             ddlCountry.DataBind();
             ddlCountry.Items.Insert(0, new ListItem("Select Country", "0"));
-            
+
         }
-        
+
         protected void ddlCountry_SelectedIndexChanged1(object sender, EventArgs e)
         {
             if (ddlCountry.SelectedValue != "0")
@@ -90,7 +90,7 @@ namespace Form
                 ddlState.Items.Insert(0, new ListItem("Select State", "0"));
                 ddlState.Enabled = true;
                 ddlCity.Items.Clear();
-                
+
             }
             else
             {
@@ -118,7 +118,7 @@ namespace Form
                 ddlCity.DataBind();
                 ddlCity.Items.Insert(0, new ListItem("Select City", "0"));
                 ddlCity.Enabled = true;
-                
+
             }
             else
             {
@@ -195,7 +195,50 @@ namespace Form
             sda.Fill(dt);
             grvDataDisplay.DataSource = dt;
             grvDataDisplay.DataBind();
+            con.Close();
+        }
 
+        protected void grvDataDisplay_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            grvDataDisplay.EditIndex = e.NewEditIndex;
+            DataDisplay();
+        }
+
+        protected void grvDataDisplay_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
+            SqlConnection db = new SqlConnection(connectionString);
+            string update = "sppersonUpdate";
+            db.Open();
+            SqlCommand cmd = new SqlCommand(update, db);
+            cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
+            cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
+            cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
+            cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
+            cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+            cmd.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
+            cmd.Parameters.AddWithValue("@State", ddlState.SelectedValue);
+            cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
+            cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
+            cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
+            cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
+            cmd.Parameters.AddWithValue("@DMLFlag", "");
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.ExecuteNonQuery();
+            db.Close();
+
+        }
+
+        protected void grvDataDisplay_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditRecord")
+            {
+                int Pid = Convert.ToInt32(e.CommandArgument);
+            }
+            else if (e.CommandName == "UpdateRecord")
+            {
+            }
         }
     }
 }
