@@ -203,41 +203,32 @@ namespace Form
             grvDataDisplay.EditIndex = e.NewEditIndex;
             DataDisplay();
         }
-
-        protected void grvDataDisplay_RowUpdated(object sender, GridViewUpdatedEventArgs e)
-        {
-            SqlConnection db = new SqlConnection(connectionString);
-            string update = "sppersonUpdate";
-            db.Open();
-            SqlCommand cmd = new SqlCommand(update, db);
-            cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
-            cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
-            cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
-            cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
-            cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-            cmd.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
-            cmd.Parameters.AddWithValue("@State", ddlState.SelectedValue);
-            cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
-            cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
-            cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
-            cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
-            cmd.Parameters.AddWithValue("@DMLFlag", "");
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.ExecuteNonQuery();
-            db.Close();
-
-        }
-
         protected void grvDataDisplay_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditRecord")
             {
                 int Pid = Convert.ToInt32(e.CommandArgument);
-            }
-            else if (e.CommandName == "UpdateRecord")
-            {
+                SqlConnection db = new SqlConnection(connectionString);
+                string update = "sppersonUpdate";
+                db.Open();
+                SqlCommand cmd = new SqlCommand(update, db);
+                cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
+                cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
+                cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
+                cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
+                cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                cmd.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
+                cmd.Parameters.AddWithValue("@State", ddlState.SelectedValue);
+                cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
+                cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
+                cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
+                cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
+                cmd.Parameters.AddWithValue("@DMLFlag", "");
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.ExecuteNonQuery();
+                db.Close();
             }
         }
     }
