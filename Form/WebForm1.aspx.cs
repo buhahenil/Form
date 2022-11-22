@@ -13,6 +13,8 @@ namespace Form
     public partial class WebForm1 : System.Web.UI.Page
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
+       
+
         //private object txtCunrtyId;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,15 +24,14 @@ namespace Form
                 btnSubmit.Enabled = true;
                 bindCountry();
                 DataDisplay();
+                //FillTheData();
+                
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
 
             }
         }
-
-
-
-        //first name 
+         //first name 
         protected void txtFirstName_TextChanged(object sender, EventArgs e)
         {
 
@@ -174,7 +175,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
             cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
-            cmd.Parameters.AddWithValue("@Gendar", rblGender.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
@@ -205,31 +206,62 @@ namespace Form
         }
         protected void grvDataDisplay_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "EditRecord")
-            {
+             if (e.CommandName == "EditRecord")
+             {
                 int Pid = Convert.ToInt32(e.CommandArgument);
-                SqlConnection db = new SqlConnection(connectionString);
-                string update = "sppersonUpdate";
-                db.Open();
-                SqlCommand cmd = new SqlCommand(update, db);
-                cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
-                cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
-                cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
-                cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
-                cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-                cmd.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
-                cmd.Parameters.AddWithValue("@State", ddlState.SelectedValue);
-                cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
-                cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
-                cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
-                cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
-                cmd.Parameters.AddWithValue("@DMLFlag", "");
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.ExecuteNonQuery();
-                db.Close();
+                FillTheData(Pid);
+             }
+        }
+        
+        private void FillTheData(int Pid)
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("sppersonSelectedbyId", con);
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            cmd.Parameters.AddWithValue("@Pid", Pid);
+            sda.Fill(dt);
+            con.Close();
+            if(dt.Rows.Count>0)
+            {
+                Databind(dt.Rows[0]);
             }
+        }
+        protected void Databind(DataRow row)
+        {
+            txtFirstName.Text = Convert.ToString(row["FirstName"]);
+            txtMiddleName.Text = Convert.ToString(row["MiddleName"]);
+            txtLastName.Text = Convert.ToString(row["LastName"]);
+            txtMoblieNumber.Text = Convert.ToString(row["MoblieNumber"]);
+            txtAddress.Text = Convert.ToString(row["Address"]);  
+            txtPincode.Text = Convert.ToString(row["Pincode"]);
+            
+            
+            //------------
+            
+            ddlCountry.SelectedValue = Convert.ToString(row["Country"]);
+            ddlCountry_SelectedIndexChanged1(null,null);
+            
+            ddlState.SelectedValue = Convert.ToString(row["State"]);
+            ddlState_SelectedIndexChanged1(null,null);
+
+            ddlCity.SelectedValue = Convert.ToString(row["City"]);
+
+         
+            txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
+            rblGender.SelectedIndex = Convert.ToInt32(rblGender.Items.IndexOf
+                (rblGender.Items.FindByText(dt.Tables[0].Rows[0]["Gender"].ToString())));
+
+
+
+
+            cblHobbies.SelectedValue = Convert.ToString(row["Hobbies"]);
+            
+            //-----------
         }
     }
 }
