@@ -13,7 +13,7 @@ namespace Form
     public partial class WebForm1 : System.Web.UI.Page
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
-       
+
 
         //private object txtCunrtyId;
 
@@ -25,13 +25,13 @@ namespace Form
                 bindCountry();
                 DataDisplay();
                 //FillTheData();
-                
+
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
 
             }
         }
-         //first name 
+        //first name 
         protected void txtFirstName_TextChanged(object sender, EventArgs e)
         {
 
@@ -206,13 +206,13 @@ namespace Form
         }
         protected void grvDataDisplay_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-             if (e.CommandName == "EditRecord")
-             {
+            if (e.CommandName == "EditRecord")
+            {
                 int Pid = Convert.ToInt32(e.CommandArgument);
                 FillTheData(Pid);
-             }
+            }
         }
-        
+
         private void FillTheData(int Pid)
         {
             SqlConnection con = new SqlConnection(connectionString);
@@ -225,7 +225,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@Pid", Pid);
             sda.Fill(dt);
             con.Close();
-            if(dt.Rows.Count>0)
+            if (dt.Rows.Count > 0)
             {
                 Databind(dt.Rows[0]);
             }
@@ -236,31 +236,42 @@ namespace Form
             txtMiddleName.Text = Convert.ToString(row["MiddleName"]);
             txtLastName.Text = Convert.ToString(row["LastName"]);
             txtMoblieNumber.Text = Convert.ToString(row["MoblieNumber"]);
-            txtAddress.Text = Convert.ToString(row["Address"]);  
+            txtAddress.Text = Convert.ToString(row["Address"]);
             txtPincode.Text = Convert.ToString(row["Pincode"]);
-            
-            
+
+
             //------------
-            
+
             ddlCountry.SelectedValue = Convert.ToString(row["Country"]);
-            ddlCountry_SelectedIndexChanged1(null,null);
-            
+            ddlCountry_SelectedIndexChanged1(null, null);
+
             ddlState.SelectedValue = Convert.ToString(row["State"]);
-            ddlState_SelectedIndexChanged1(null,null);
+            ddlState_SelectedIndexChanged1(null, null);
 
             ddlCity.SelectedValue = Convert.ToString(row["City"]);
 
-         
+
             txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
-            rblGender.SelectedIndex = Convert.ToInt32(rblGender.Items.IndexOf
-                (rblGender.Items.FindByText(dt.Tables[0].Rows[0]["Gender"].ToString())));
+            //rblGender.SelectedItem.Text = Convert.ToString(row["Gender"]);
+            //if () 
+            //{ }
 
 
-
-
-            cblHobbies.SelectedValue = Convert.ToString(row["Hobbies"]);
+            //cblHobbies.SelectedValue = Convert.ToString(row["Hobbies"]);
+            string[] array = Convert.ToString(row["Hobbies"]).Split(',');
             
+            for (int i = 0; i < cblHobbies.Items.Count; i++)
+            {
+                cblHobbies.Items[i].Selected = false;
+                for (int k = 0; k < array.Length; k++)
+                {
+                    if (cblHobbies.Items[i].Text == array[k])
+                    {
+                        cblHobbies.Items[i].Selected = true;
+                    }
+                }
+            }
             //-----------
         }
     }
