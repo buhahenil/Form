@@ -180,7 +180,10 @@
                         <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
                         <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
                     </asp:RadioButtonList>
-                     
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="ReqGender" ControlToValidate="rblGender" Display="Dynamic" ValidationGroup="LoginFrame"
+                        runat="server" ErrorMessage="Select Gender"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
