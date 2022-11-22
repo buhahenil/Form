@@ -202,6 +202,10 @@
                         <asp:ListItem>Writing</asp:ListItem>
                     </asp:CheckBoxList>
                 </td>
+                <%--<td>
+                    <asp:RequiredFieldValidator ID="ReqHobbies" ControlToValidate="cblHobbies" Display="Dynamic" ValidationGroup="LoginFrame"
+                        runat="server" ErrorMessage="Select min 3" ForeColor="Red"></asp:RequiredFieldValidator>
+                </td>--%>
             </tr>
 
             <tr>
