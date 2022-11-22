@@ -27,7 +27,7 @@
                             <asp:BoundField DataField="State" HeaderText="State" />
                             <asp:BoundField DataField="City" HeaderText="City" />
                             <asp:BoundField DataField="Pincode" HeaderText="Pincode" />
-                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" />
+                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:MM/dd/yyyy}"/>
                             <asp:BoundField DataField="Gender" HeaderText="Gender" />
                             <asp:BoundField DataField="Hobbies" HeaderText="Hobbies" />
                             
@@ -180,7 +180,7 @@
                         <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
                         <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
                     </asp:RadioButtonList>
-
+                     
                 </td>
             </tr>
 

@@ -253,10 +253,8 @@ namespace Form
 
             txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
-            //rblGender.SelectedItem.Text = Convert.ToString(row["Gender"]);
-            //if () 
-            //{ }
-
+         
+            rblGender.SelectedValue = Convert.ToString(row["Gender"]);
 
             //cblHobbies.SelectedValue = Convert.ToString(row["Hobbies"]);
             string[] array = Convert.ToString(row["Hobbies"]).Split(',');
