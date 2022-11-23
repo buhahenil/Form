@@ -13,8 +13,7 @@ namespace Form
     public partial class WebForm1 : System.Web.UI.Page
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
-
-
+        
         //private object txtCunrtyId;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace Form
         {
 
         }
-        // moblie number
+        
         protected void txtMoblieNumber_TextChanged(object sender, EventArgs e)
         {
 
@@ -177,6 +176,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
             cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
+            cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -185,6 +185,7 @@ namespace Form
 
             Response.Redirect(Request.Url.AbsoluteUri);
         }
+        //gridview bind
         private void DataDisplay()
         {
             SqlConnection con = new SqlConnection(connectionString);
@@ -230,6 +231,7 @@ namespace Form
                 Databind(dt.Rows[0]);
             }
         }
+        // data open form
         protected void Databind(DataRow row)
         {
             txtFirstName.Text = Convert.ToString(row["FirstName"]);
@@ -238,7 +240,6 @@ namespace Form
             txtMoblieNumber.Text = Convert.ToString(row["MoblieNumber"]);
             txtAddress.Text = Convert.ToString(row["Address"]);
             txtPincode.Text = Convert.ToString(row["Pincode"]);
-
 
             //------------
 
@@ -250,13 +251,11 @@ namespace Form
 
             ddlCity.SelectedValue = Convert.ToString(row["City"]);
 
-
-            txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-
-         
+            txtDate.Text = Convert.ToDateTime(row["DateOfBrith"]).ToString("yyyy-MM-dd");
+            
             rblGender.SelectedValue = Convert.ToString(row["Gender"]);
 
-            //cblHobbies.SelectedValue = Convert.ToString(row["Hobbies"]);
+         
             string[] array = Convert.ToString(row["Hobbies"]).Split(',');
             
             for (int i = 0; i < cblHobbies.Items.Count; i++)
@@ -269,8 +268,38 @@ namespace Form
                         cblHobbies.Items[i].Selected = true;
                     }
                 }
-            }
+            }  
             //-----------
+        }
+
+        protected void btnUpDate_Click(object sender, EventArgs e)
+        {
+            SqlConnection db = new SqlConnection(connectionString);
+            string update = "sppersonUpdate";
+            db.Open();
+            SqlCommand cmd = new SqlCommand(update, db);
+            
+            cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
+            cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
+            cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
+            cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
+            cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+            cmd.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
+            cmd.Parameters.AddWithValue("@State", ddlState.SelectedValue);
+            cmd.Parameters.AddWithValue("@City", ddlCity.SelectedValue);
+            cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
+            cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
+            cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
+            cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
+            cmd.Parameters.AddWithValue("@Pid",HiddenField1.Value);
+            cmd.Parameters.AddWithValue("@DMLFlag", "U");
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.ExecuteNonQuery();
+            db.Close();
+
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
     }
 }

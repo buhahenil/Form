@@ -27,9 +27,10 @@
                             <asp:BoundField DataField="State" HeaderText="State" />
                             <asp:BoundField DataField="City" HeaderText="City" />
                             <asp:BoundField DataField="Pincode" HeaderText="Pincode" />
-                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:MM/dd/yyyy}"/>
+                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:dd/MM/yyyy}"/>
                             <asp:BoundField DataField="Gender" HeaderText="Gender" />
                             <asp:BoundField DataField="Hobbies" HeaderText="Hobbies" />
+                            <asp:BoundField DataField="TermsAndConditions" HeaderText="TermsAndConditions" />
                             
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
@@ -41,8 +42,9 @@
                     </asp:GridView>
                 </td>
             </tr>
-        </table>
+        </table> <br/><br/>
         <table border="1">
+            <asp:HiddenField ID="HiddenField1" runat="server" />
             <tr>
                 <td>
                     <asp:Label ID="lblFirstName" runat="server" Text="First Name"></asp:Label>
@@ -52,11 +54,11 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="reqFirstName" ControlToValidate="txtFirstName" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Enter Fname"></asp:RequiredFieldValidator>
+                        runat="server" ErrorMessage="Enter Firstname" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
                 <td>
                     <asp:RegularExpressionValidator ID="revFirstName" ValidationGroup="LoginFrame" Display="Dynamic" ValidationExpression="(^[A-Z a-z]*$)"
-                        ControlToValidate="txtFirstName" runat="server" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
+                        ControlToValidate="txtFirstName" runat="server" ForeColor="Red" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -79,7 +81,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqLastName" ControlToValidate="txtLastName" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Enter Lastname"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Enter Lastname"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -92,7 +94,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqMoblieNumber" ControlToValidate="txtMoblieNumber" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Enter MoblieNumber"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Enter MoblieNumber"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -105,7 +107,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqAddress" ControlToValidate="txtAddress" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Enter Address"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Enter Address"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -118,7 +120,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqCountry" ControlToValidate="ddlCountry" ValidationGroup="LoginFrame" InitialValue="0"
-                        runat="server" ErrorMessage="Select Country" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Select Country" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
 
             </tr>
@@ -132,7 +134,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqState" ControlToValidate="ddlState" ValidationGroup="LoginFrame" InitialValue="0"
-                        runat="server" ErrorMessage="Select State" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Select State" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -145,7 +147,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqCity" ControlToValidate="ddlCity" ValidationGroup="LoginFrame" InitialValue="0"
-                        runat="server" ErrorMessage="Select City" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Select City" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -167,7 +169,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqDate" ControlToValidate="txtDate" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Enter Date"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Enter Date"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -183,7 +185,7 @@
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqGender" ControlToValidate="rblGender" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Select Gender"></asp:RequiredFieldValidator>
+                        runat="server" ForeColor="Red" ErrorMessage="Select Gender"></asp:RequiredFieldValidator>
                 </td>
             </tr>
 
@@ -202,10 +204,7 @@
                         <asp:ListItem>Writing</asp:ListItem>
                     </asp:CheckBoxList>
                 </td>
-                <%--<td>
-                    <asp:RequiredFieldValidator ID="ReqHobbies" ControlToValidate="cblHobbies" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ErrorMessage="Select min 3" ForeColor="Red"></asp:RequiredFieldValidator>
-                </td>--%>
+                
             </tr>
 
             <tr>
@@ -213,11 +212,13 @@
                     <asp:CheckBox ID="chkIsTermsAccept" runat="server" Text="I Agree with this from" OnCheckedChanged="chkIsTermsAccept_CheckedChanged"
                         AutoPostBack="true" />
                 </td>
+                
             </tr>
 
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
                     <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" ValidationGroup="LoginFrame" />
+                    <asp:Button ID="btnUpDate" runat="server" Text="Update" OnClick="btnUpDate_Click" Style="height: 26px" ValidationGroup="LoginFrame"/>
                 </td>
             </tr>
         </table>
