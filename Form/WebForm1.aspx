@@ -13,6 +13,7 @@
 <body>
     <form id="form1" runat="server">
         <asp:Button ID="btnAddnew" runat="server" Text="Addnew" OnClick="btnAddnew_Click"/>
+        <br/><br/>
         <table>
             <tr>
                 <td>

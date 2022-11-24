@@ -20,7 +20,7 @@ namespace Form
         {
             if (!IsPostBack)
             {
-                
+                btnUpDate.Visible = false;
                 btnSubmit.Enabled = true;
                 //btnUpDate.Visible = false;
                 bindCountry();
@@ -214,7 +214,8 @@ namespace Form
             {
                 int Pid = Convert.ToInt32(e.CommandArgument);
                 FillTheData(Pid);
-                btnUpDate.Visible = true;
+                btnUpDate.Visible = true;  // button update visible
+                btnSubmit.Visible = false; // button submit is not visible 
             }
             else if (e.CommandName == "DeleteRecord")
             {
