@@ -12,7 +12,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <%--<asp:Button ID="btnAddnew" runat="server" Text="AddNew" OnClick="btnAddnew_Click" />--%>
+        
         <table>
             <tr>
                 <td>
