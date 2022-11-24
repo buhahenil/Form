@@ -44,7 +44,7 @@
             </tr>
         </table> <br/><br/>
         <table border="1">
-            <asp:HiddenField ID="HiddenField1" runat="server" />
+            <asp:HiddenField ID="hdnPid" runat="server" />
             <tr>
                 <td>
                     <asp:Label ID="lblFirstName" runat="server" Text="First Name"></asp:Label>

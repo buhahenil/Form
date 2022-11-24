@@ -179,6 +179,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
+            
 
             cmd.ExecuteNonQuery();
             db.Close();
@@ -231,9 +232,10 @@ namespace Form
                 Databind(dt.Rows[0]);
             }
         }
-        // data open form
+        // edit for
         protected void Databind(DataRow row)
         {
+            hdnPid.Value = Convert.ToString(row["Pid"]);
             txtFirstName.Text = Convert.ToString(row["FirstName"]);
             txtMiddleName.Text = Convert.ToString(row["MiddleName"]);
             txtLastName.Text = Convert.ToString(row["LastName"]);
@@ -291,9 +293,8 @@ namespace Form
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
             cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
-            cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
-            cmd.Parameters.AddWithValue("@Pid",HiddenField1.Value);
-            cmd.Parameters.AddWithValue("@DMLFlag", "U");
+            cmd.Parameters.AddWithValue("@Pid", hdnPid.Value);
+            
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.ExecuteNonQuery();
