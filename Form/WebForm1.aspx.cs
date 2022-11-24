@@ -214,6 +214,7 @@ namespace Form
             {
                 int Pid = Convert.ToInt32(e.CommandArgument);
                 FillTheData(Pid);
+                btnUpDate.Visible = true;
             }
             else if (e.CommandName == "DeleteRecord")
             {
@@ -330,15 +331,7 @@ namespace Form
 
         protected void btnAddnew_Click(object sender, EventArgs e)
         {
-            if (btnAddnew.OnClick)
-            {
-                btnSubmit.Visible = true;
-            }
-            else 
-            {
-                btnSubmit.Visible = false;
-            }
-
+            btnUpDate.Visible = false;
         }
     }
 }
