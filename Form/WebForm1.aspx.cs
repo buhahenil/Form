@@ -281,6 +281,7 @@ namespace Form
             db.Open();
             SqlCommand cmd = new SqlCommand(update, db);
             
+            cmd.Parameters.AddWithValue("@Pid", hdnPid.Value);
             cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
             cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
             cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
@@ -293,10 +294,9 @@ namespace Form
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
             cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
-            cmd.Parameters.AddWithValue("@Pid", hdnPid.Value);
-            
             cmd.CommandType = CommandType.StoredProcedure;
 
+            
             cmd.ExecuteNonQuery();
             db.Close();
 
