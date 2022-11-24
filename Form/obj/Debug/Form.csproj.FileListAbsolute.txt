@@ -33,3 +33,4 @@ D:\buhahenil\Form\Form\obj\Debug\Form.csproj.CoreCompileInputs.cache
 D:\buhahenil\Form\Form\obj\Debug\Form.csproj.CopyComplete
 D:\buhahenil\Form\Form\obj\Debug\Form.dll
 D:\buhahenil\Form\Form\obj\Debug\Form.pdb
+D:\buhahenil\Form\Form\obj\Debug\Form.csproj.AssemblyReference.cache

@@ -20,8 +20,9 @@ namespace Form
         {
             if (!IsPostBack)
             {
+                
                 btnSubmit.Enabled = true;
-                btnUpDate.Visible = false;
+                //btnUpDate.Visible = false;
                 bindCountry();
                 DataDisplay();
                 ddlState.Enabled = false;
@@ -327,16 +328,17 @@ namespace Form
             Response.Redirect(Request.Url.AbsoluteUri);
         }
 
-        //protected void btnAddnew_Click(object sender, EventArgs e)
-        //{
-        //    if (btnAddnew.Click == btnSubmit)
-        //    {
-        //        btnSubmit.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        btnSubmit.Visible = false;
-        //    }
-        //}
+        protected void btnAddnew_Click(object sender, EventArgs e)
+        {
+            if (btnAddnew.OnClick)
+            {
+                btnSubmit.Visible = true;
+            }
+            else 
+            {
+                btnSubmit.Visible = false;
+            }
+
+        }
     }
 }
