@@ -12,6 +12,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <%--<asp:Button ID="btnAddnew" runat="server" Text="AddNew" OnClick="btnAddnew_Click" />--%>
         <table>
             <tr>
                 <td>
@@ -36,7 +37,14 @@
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="False" CommandName="EditRecord" CommandArgument='<%# Eval("Pid") %>'
                                         Text="Edit"></asp:LinkButton>
-                                </ItemTemplate>
+                                </ItemTemplate> 
+                            </asp:TemplateField>
+
+                            <asp:TemplateField ShowHeader="False">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkDelete" runat="server" CausesValidation="False" CommandName="DeleteRecord" CommandArgument='<%# Eval("Pid") %>'
+                                        Text="Delete"></asp:LinkButton>
+                                </ItemTemplate> 
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>

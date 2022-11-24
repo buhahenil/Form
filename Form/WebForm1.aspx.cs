@@ -23,8 +23,7 @@ namespace Form
                 btnSubmit.Enabled = true;
                 bindCountry();
                 DataDisplay();
-                //FillTheData();
-
+                
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
 
@@ -213,8 +212,26 @@ namespace Form
                 int Pid = Convert.ToInt32(e.CommandArgument);
                 FillTheData(Pid);
             }
+            else if (e.CommandName == "DeleteRecord")
+            {
+                int Pid = Convert.ToInt32(e.CommandArgument);
+                DeleteTheDate(Pid);
+            }
         }
-
+        // detele record 
+        private void DeleteTheDate(int Pid) 
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("sppersonDelete", con);
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            cmd.Parameters.AddWithValue("@Pid", Pid);
+            sda.Fill(dt);
+            con.Close();
+        }
+        //open the data form
         private void FillTheData(int Pid)
         {
             SqlConnection con = new SqlConnection(connectionString);
