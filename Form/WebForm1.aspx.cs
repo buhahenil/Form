@@ -20,7 +20,6 @@ namespace Form
         {
             if (!IsPostBack)
             {
-                
                 btnSubmit.Enabled = true;
                 //btnUpDate.Visible = false;
                 bindCountry();
