@@ -21,9 +21,9 @@ namespace Form
             if (!IsPostBack)
             {
                 btnSubmit.Enabled = true;
+                btnUpDate.Visible = false;
                 bindCountry();
                 DataDisplay();
-                
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
 
@@ -205,6 +205,8 @@ namespace Form
             grvDataDisplay.EditIndex = e.NewEditIndex;
             DataDisplay();
         }
+
+        // Gridview in button EDIT and DELETE 
         protected void grvDataDisplay_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditRecord")
@@ -218,7 +220,7 @@ namespace Form
                 DeleteTheDate(Pid);
             }
         }
-        // detele record 
+        // Detele Record 
         private void DeleteTheDate(int Pid) 
         {
             SqlConnection con = new SqlConnection(connectionString);
@@ -228,8 +230,11 @@ namespace Form
             cmd.CommandType = CommandType.StoredProcedure;
             DataTable dt = new DataTable();
             cmd.Parameters.AddWithValue("@Pid", Pid);
+            cmd.ExecuteNonQuery();
             sda.Fill(dt);
             con.Close();
+
+            DataDisplay();
         }
         //open the data form
         private void FillTheData(int Pid)
@@ -249,7 +254,7 @@ namespace Form
                 Databind(dt.Rows[0]);
             }
         }
-        // edit for
+        // Gridview in Edit
         protected void Databind(DataRow row)
         {
             hdnPid.Value = Convert.ToString(row["Pid"]);
@@ -291,6 +296,8 @@ namespace Form
             //-----------
         }
 
+
+        //this code is Record Upadte 
         protected void btnUpDate_Click(object sender, EventArgs e)
         {
             SqlConnection db = new SqlConnection(connectionString);
@@ -319,5 +326,17 @@ namespace Form
 
             Response.Redirect(Request.Url.AbsoluteUri);
         }
+
+        //protected void btnAddnew_Click(object sender, EventArgs e)
+        //{
+        //    if (btnAddnew.Click == btnSubmit)
+        //    {
+        //        btnSubmit.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        btnSubmit.Visible = false;
+        //    }
+        //}
     }
 }

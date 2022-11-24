@@ -12,7 +12,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        
+		<div>
+            <asp:Button ID="btnAddnew" runat="server" Text="Button" OnClick="btnAddnew_Click" />
+        </div>
         <table>
             <tr>
                 <td>
@@ -51,6 +53,8 @@
                 </td>
             </tr>
         </table> <br/><br/>
+		
+        <%-- Form  --%>
         <table border="1">
             <asp:HiddenField ID="hdnPid" runat="server" />
             <tr>
