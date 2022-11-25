@@ -22,8 +22,8 @@ namespace Form
             {
 
                 btnUpDate.Visible = false;
-                btnSubmit.Enabled = true;
-                //btnUpDate.Visible = false;
+                btnSubmit.Enabled = false;
+                btnUpDate.Enabled = false;
                 bindCountry();
                 DataDisplay();
                 ddlState.Enabled = false;
@@ -153,10 +153,12 @@ namespace Form
             if (chkIsTermsAccept.Checked)
             {
                 btnSubmit.Enabled = true;
+                btnUpDate.Enabled = true;
             }
             else
             {
                 btnSubmit.Enabled = false;
+                btnUpDate.Enabled = false;
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -258,7 +260,7 @@ namespace Form
                 Databind(dt.Rows[0]);
             }
         }
-        // Gridview in Edit
+        // Gridview in Edit 
         protected void Databind(DataRow row)
         {
             hdnPid.Value = Convert.ToString(row["Pid"]);
@@ -285,6 +287,7 @@ namespace Form
 
          
             string[] array = Convert.ToString(row["Hobbies"]).Split(',');
+
             
             for (int i = 0; i < cblHobbies.Items.Count; i++)
             {
