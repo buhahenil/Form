@@ -161,6 +161,7 @@ namespace Form
                 btnUpDate.Enabled = false;
             }
         }
+        // data insert 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             SqlConnection db = new SqlConnection(connectionString);
