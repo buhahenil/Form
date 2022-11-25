@@ -145,7 +145,13 @@ namespace Form
 
         protected void cblHobbies_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            for (int i = 0;i< cblHobbies.Items.Count;i++)
+            {
+                if (cblHobbies.Items[i].Selected == true) 
+                {
+                    
+                }
+            }
         }
         // terms and condition
         protected void chkIsTermsAccept_CheckedChanged(object sender, EventArgs e)
@@ -286,7 +292,7 @@ namespace Form
             
             rblGender.SelectedValue = Convert.ToString(row["Gender"]);
 
-         
+            
             string[] array = Convert.ToString(row["Hobbies"]).Split(',');
 
             

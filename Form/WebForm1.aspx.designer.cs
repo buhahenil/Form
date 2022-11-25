@@ -105,6 +105,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtMiddleName;
 
         /// <summary>
+        /// revMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMiddleName;
+
+        /// <summary>
         /// lblLastName control.
         /// </summary>
         /// <remarks>
@@ -150,13 +159,13 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtMoblieNumber;
 
         /// <summary>
-        /// ReqMoblieNumber control.
+        /// revMoblieNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqMoblieNumber;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMoblieNumber;
 
         /// <summary>
         /// lblAddress control.
@@ -256,6 +265,24 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPincode;
+
+        /// <summary>
+        /// reqPincode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqPincode;
+
+        /// <summary>
+        /// revPincode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revPincode;
 
         /// <summary>
         /// lblDate control.

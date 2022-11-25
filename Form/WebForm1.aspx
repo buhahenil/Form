@@ -80,6 +80,10 @@
                 <td>
                     <asp:TextBox ID="txtMiddleName" runat="server"></asp:TextBox>
                 </td>
+                <td>
+                    <asp:RegularExpressionValidator ID="revMiddleName" ValidationGroup="LoginFrame" Display="Dynamic" ValidationExpression="(^[A-Z a-z]*$)"
+                        ControlToValidate="txtMiddleName" runat="server" ForeColor="Red" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
+                </td>
             </tr>
 
 
@@ -104,8 +108,9 @@
                     <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged" ValidationGroup="LoginFrame"></asp:TextBox><br />
                 </td>
                 <td>
-                    <asp:RequiredFieldValidator ID="ReqMoblieNumber" ControlToValidate="txtMoblieNumber" Display="Dynamic" ValidationGroup="LoginFrame"
-                        runat="server" ForeColor="Red" ErrorMessage="Enter MoblieNumber"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="revMoblieNumber" runat="server" ErrorMessage="Enetr the Only Number" ControlToValidate="txtMoblieNumber" 
+                        ValidationExpression="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" ForeColor="Red" ValidationGroup="LoginFrame" Display="Dynamic">
+                    </asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -168,6 +173,15 @@
                 </td>
                 <td>
                     <asp:TextBox ID="txtPincode" runat="server" OnTextChanged="txtPincode_TextChanged"></asp:TextBox><br />
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="reqPincode" ControlToValidate="txtPincode" ValidationGroup="LoginFrame" 
+                        runat="server" ForeColor="Red" ErrorMessage="Enter Pin Code" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                </td>
+                <td>
+                    <asp:RegularExpressionValidator ID="revPincode" runat="server" ErrorMessage="Enetr only 6 Digit" ControlToValidate="txtPincode" 
+                        ValidationExpression="^[1-9][0-9]{5}$" ForeColor="Red" ValidationGroup="LoginFrame" Display="Dynamic">
+                    </asp:RegularExpressionValidator>
                 </td>
             </tr>
 
