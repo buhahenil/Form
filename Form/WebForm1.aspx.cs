@@ -20,6 +20,7 @@ namespace Form
         {
             if (!IsPostBack)
             {
+
                 btnUpDate.Visible = false;
                 btnSubmit.Enabled = true;
                 //btnUpDate.Visible = false;
