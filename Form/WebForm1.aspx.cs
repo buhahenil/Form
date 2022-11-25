@@ -334,6 +334,8 @@ namespace Form
         protected void btnAddnew_Click(object sender, EventArgs e)
         {
             btnUpDate.Visible = false;
+            btnSubmit.Visible = true;
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
     }
 }
