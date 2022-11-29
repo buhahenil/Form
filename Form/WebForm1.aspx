@@ -20,20 +20,61 @@
                 <td>
                     <asp:GridView ID="grvDataDisplay" runat="server" AutoGenerateColumns="False" EmptyDataText="No record found" OnRowCommand="grvDataDisplay_RowCommand">
                         <Columns>
-                            <asp:BoundField DataField="Pid" HeaderText="Pid" />
-                            <asp:BoundField DataField="FirstName" HeaderText="FirstName" />
-                            <asp:BoundField DataField="MiddleName" HeaderText="MiddleName" />
-                            <asp:BoundField DataField="LastName" HeaderText="LastName" />
-                            <asp:BoundField DataField="MoblieNumber" HeaderText="MoblieNumber" />
-                            <asp:BoundField DataField="Address" HeaderText="Address" />
-                            <asp:BoundField DataField="Country" HeaderText="Country" />
-                            <asp:BoundField DataField="State" HeaderText="State" />
-                            <asp:BoundField DataField="City" HeaderText="City" />
+                            <asp:BoundField DataField="Pid" HeaderText="Pid">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="FirstName" HeaderText="FirstName">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="MiddleName" HeaderText="MiddleName">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="LastName" HeaderText="LastName">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="MoblieNumber" HeaderText="MoblieNumber">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="Address" HeaderText="Address">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="Country" HeaderText="Country">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="State" HeaderText="State">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="City" HeaderText="City">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
                             <asp:BoundField DataField="Pincode" HeaderText="Pincode" />
-                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:dd/MM/yyyy}" />
-                            <asp:BoundField DataField="Gender" HeaderText="Gender" />
-                            <asp:BoundField DataField="Hobbies" HeaderText="Hobbies" />
-                            <asp:BoundField DataField="TermsAndConditions" HeaderText="TermsAndConditions" />
+
+                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:dd/MM/yyyy}">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="Gender" HeaderText="Gender">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            
+
+                            <asp:TemplateField HeaderText="TermsAndConditions">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="cblTermsAndConditions" runat="server" CausesValidation="false" Enabled="false" Checked='<%# Convert.ToBoolean((Eval("TermsAndConditions") == DBNull.Value ? 0 : Eval("TermsAndConditions"))) %>' />
+
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
 
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
@@ -109,9 +150,9 @@
                 </td>
                 <td>
                     <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged" ValidationGroup="LoginFrame" AutoPostBack="true"></asp:TextBox><br />
-                                    
+
                 </td>
-               
+
                 <td>
                     <asp:Label ID="labMobile" runat="server" ForeColor="Red" Visible="false" Text="Enter the Different number"></asp:Label>
                     <asp:RegularExpressionValidator ID="revMoblieNumber" runat="server" ErrorMessage="Enetr the Only Number" ControlToValidate="txtMoblieNumber"
@@ -203,10 +244,7 @@
                         runat="server" ForeColor="Red" ErrorMessage="Enter Date"></asp:RequiredFieldValidator>
                     <asp:Label ID="lblAge18" runat="server" ForeColor="Red" Visible="false" Text="Age should be more than 18."></asp:Label>
                 </td>
-                <%--<td>
-                    <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Age must be between 18 to 40"  Display="Dynamic"
-                        ControlToValidate="txtDate" ForeColor="Red" MaximumValue="40" MinimumValue="18" ValidationGroup="LoginFrame"></asp:RangeValidator>  
-                </td>--%>
+
             </tr>
 
             <tr>
@@ -239,8 +277,14 @@
                         <asp:ListItem>Reading</asp:ListItem>
                         <asp:ListItem>Writing</asp:ListItem>
                     </asp:CheckBoxList>
-                </td>
 
+                </td>
+                <td>
+                    <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true" OnServerValidate="cblHobbies_SelectedIndexChanged"
+                        ClientValidationFunction="CheckBoxRequired_ClientValidate" Display="Dynamic" ValidationGroup="LoginFrame"></asp:CustomValidator>
+
+                    <asp:Label ID="lblHobbie" runat="server" ForeColor="Red" Visible="false" Text="Minimun 3 Selected" AutoPostBack="True"></asp:Label>
+                </td>
             </tr>
 
             <tr>

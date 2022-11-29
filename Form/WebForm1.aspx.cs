@@ -14,7 +14,7 @@ namespace Form
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
 
-        
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +26,7 @@ namespace Form
                 btnUpDate.Enabled = false;
                 bindCountry();
                 DataDisplay();
+
                 ddlState.Enabled = false;
                 ddlCity.Enabled = false;
 
@@ -49,7 +50,7 @@ namespace Form
         }
 
         protected void txtMoblieNumber_TextChanged(object sender, EventArgs e)
-        {   
+        {
             //validation 
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("sppersonSelectedbyMobile", con);
@@ -181,8 +182,26 @@ namespace Form
 
         protected void cblHobbies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            int selectedCnt = 0;
+            for (int i = 0; i < cblHobbies.Items.Count; i++)
+            {
+                if (cblHobbies.Items[i].Selected)
+                {
+                    selectedCnt++;
+                }
+            }
+
+            if (selectedCnt < 3)
+            {
+                lblHobbie.Visible = true;
+            }
+            else
+            {
+                lblHobbie.Visible = false;
+            }
         }
+
+
         // terms and condition
         protected void chkIsTermsAccept_CheckedChanged(object sender, EventArgs e)
         {
@@ -200,7 +219,7 @@ namespace Form
         // data insert 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (lblAge18.Visible)
+            if (lblAge18.Visible || lblHobbie.Visible)
             {
                 return;
             }
@@ -208,6 +227,7 @@ namespace Form
             {
                 return;
             }
+            
 
             SqlConnection db = new SqlConnection(connectionString);
             string insert = "sppersonCrud";
@@ -271,6 +291,7 @@ namespace Form
                 int Pid = Convert.ToInt32(e.CommandArgument);
                 DeleteTheDate(Pid);
             }
+
         }
         // Detele Record 
         private void DeleteTheDate(int Pid)
@@ -333,8 +354,6 @@ namespace Form
 
 
             string[] array = Convert.ToString(row["Hobbies"]).Split(',');
-
-
             for (int i = 0; i < cblHobbies.Items.Count; i++)
             {
                 cblHobbies.Items[i].Selected = false;
@@ -346,6 +365,17 @@ namespace Form
                     }
                 }
             }
+
+            //chkIsTermsAccept.Checked = Convert.ToBoolean(row["TermsAndConditions"]);
+            //if (chkIsTermsAccept.Checked)
+            //{
+            //    chkIsTermsAccept.Checked = true;
+            //}
+            //else
+            //{
+            //    chkIsTermsAccept.Checked = false;
+            //}
+
             //-----------
         }
 

@@ -375,6 +375,24 @@ namespace Form
         protected global::System.Web.UI.WebControls.CheckBoxList cblHobbies;
 
         /// <summary>
+        /// CheckBoxRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CheckBoxRequired;
+
+        /// <summary>
+        /// lblHobbie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHobbie;
+
+        /// <summary>
         /// chkIsTermsAccept control.
         /// </summary>
         /// <remarks>
