@@ -181,7 +181,8 @@ namespace Form
         }
 
         protected void cblHobbies_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {   
+            //validetion
             int selectedCnt = 0;
             for (int i = 0; i < cblHobbies.Items.Count; i++)
             {
@@ -218,7 +219,8 @@ namespace Form
         }
         // data insert 
         protected void btnSubmit_Click(object sender, EventArgs e)
-        {
+        {   
+            //validetion for date of brithday and Moblie and Hobbie
             if (lblAge18.Visible || lblHobbie.Visible)
             {
                 return;
@@ -228,7 +230,6 @@ namespace Form
                 return;
             }
             
-
             SqlConnection db = new SqlConnection(connectionString);
             string insert = "sppersonCrud";
             db.Open();
@@ -293,7 +294,7 @@ namespace Form
             }
 
         }
-        // Detele Record 
+        // Grid view column Detele Record 
         private void DeleteTheDate(int Pid)
         {
             SqlConnection con = new SqlConnection(connectionString);
@@ -365,17 +366,6 @@ namespace Form
                     }
                 }
             }
-
-            //chkIsTermsAccept.Checked = Convert.ToBoolean(row["TermsAndConditions"]);
-            //if (chkIsTermsAccept.Checked)
-            //{
-            //    chkIsTermsAccept.Checked = true;
-            //}
-            //else
-            //{
-            //    chkIsTermsAccept.Checked = false;
-            //}
-
             //-----------
         }
 
