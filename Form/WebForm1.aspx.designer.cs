@@ -159,6 +159,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.TextBox txtMoblieNumber;
 
         /// <summary>
+        /// labMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labMobile;
+
+        /// <summary>
         /// revMoblieNumber control.
         /// </summary>
         /// <remarks>
@@ -310,6 +319,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqDate;
+
+        /// <summary>
+        /// lblAge18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAge18;
 
         /// <summary>
         /// lblGender control.

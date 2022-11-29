@@ -13,8 +13,8 @@ namespace Form
     public partial class WebForm1 : System.Web.UI.Page
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["Preson"].ConnectionString;
+
         
-        //private object txtCunrtyId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,9 +47,26 @@ namespace Form
         {
 
         }
-        
+
         protected void txtMoblieNumber_TextChanged(object sender, EventArgs e)
-        {
+        {   
+            //validation 
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("sppersonSelectedbyMobile", con);
+            con.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dt = new DataTable();
+            cmd.Parameters.AddWithValue("@MoblieNumber", txtMoblieNumber.Text);
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                labMobile.Visible = true;
+            }
+            else
+            {
+                labMobile.Visible = false;
+            }
 
         }
         protected void txtAddress_TextChanged(object sender, EventArgs e)
@@ -135,7 +152,26 @@ namespace Form
 
         protected void txtDate_TextChanged(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(txtDate.Text))
+            {
+                // Save today's date.
+                var today = DateTime.Today;
 
+                // Calculate the age.
+                var age = today.Year - Convert.ToDateTime(txtDate.Text).Year;
+
+                // Go back to the year in which the person was born in case of a leap year
+                if (Convert.ToDateTime(txtDate.Text).Date > today.AddYears(-age)) age--;
+
+                if (age < 18)
+                {
+                    lblAge18.Visible = true;
+                }
+                else
+                {
+                    lblAge18.Visible = false;
+                }
+            }
         }
 
         protected void rblGender_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,13 +181,7 @@ namespace Form
 
         protected void cblHobbies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0;i< cblHobbies.Items.Count;i++)
-            {
-                if (cblHobbies.Items[i].Selected == true) 
-                {
-                    
-                }
-            }
+            
         }
         // terms and condition
         protected void chkIsTermsAccept_CheckedChanged(object sender, EventArgs e)
@@ -170,6 +200,15 @@ namespace Form
         // data insert 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (lblAge18.Visible)
+            {
+                return;
+            }
+            if (labMobile.Visible)
+            {
+                return;
+            }
+
             SqlConnection db = new SqlConnection(connectionString);
             string insert = "sppersonCrud";
             db.Open();
@@ -189,7 +228,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
-            
+
 
             cmd.ExecuteNonQuery();
             db.Close();
@@ -234,7 +273,7 @@ namespace Form
             }
         }
         // Detele Record 
-        private void DeleteTheDate(int Pid) 
+        private void DeleteTheDate(int Pid)
         {
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("sppersonDelete", con);
@@ -289,13 +328,13 @@ namespace Form
             ddlCity.SelectedValue = Convert.ToString(row["City"]);
 
             txtDate.Text = Convert.ToDateTime(row["DateOfBrith"]).ToString("yyyy-MM-dd");
-            
+
             rblGender.SelectedValue = Convert.ToString(row["Gender"]);
 
-            
+
             string[] array = Convert.ToString(row["Hobbies"]).Split(',');
 
-            
+
             for (int i = 0; i < cblHobbies.Items.Count; i++)
             {
                 cblHobbies.Items[i].Selected = false;
@@ -306,7 +345,7 @@ namespace Form
                         cblHobbies.Items[i].Selected = true;
                     }
                 }
-            }  
+            }
             //-----------
         }
 
@@ -318,7 +357,7 @@ namespace Form
             string update = "sppersonUpdate";
             db.Open();
             SqlCommand cmd = new SqlCommand(update, db);
-            
+
             cmd.Parameters.AddWithValue("@Pid", hdnPid.Value);
             cmd.Parameters.AddWithValue("@FirstName", txtFirstName.Text);
             cmd.Parameters.AddWithValue("@MiddleName", txtMiddleName.Text);
@@ -334,7 +373,7 @@ namespace Form
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
             cmd.CommandType = CommandType.StoredProcedure;
 
-            
+
             cmd.ExecuteNonQuery();
             db.Close();
 

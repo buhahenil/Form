@@ -12,8 +12,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Button ID="btnAddnew" runat="server" Text="Addnew" OnClick="btnAddnew_Click"/>
-        <br/><br/>
+        <asp:Button ID="btnAddnew" runat="server" Text="Addnew" OnClick="btnAddnew_Click" />
+        <br />
+        <br />
         <table>
             <tr>
                 <td>
@@ -29,30 +30,32 @@
                             <asp:BoundField DataField="State" HeaderText="State" />
                             <asp:BoundField DataField="City" HeaderText="City" />
                             <asp:BoundField DataField="Pincode" HeaderText="Pincode" />
-                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:dd/MM/yyyy}"/>
+                            <asp:BoundField DataField="DateOfBrith" HeaderText="DateOfBrith" DataFormatString="{0:dd/MM/yyyy}" />
                             <asp:BoundField DataField="Gender" HeaderText="Gender" />
                             <asp:BoundField DataField="Hobbies" HeaderText="Hobbies" />
                             <asp:BoundField DataField="TermsAndConditions" HeaderText="TermsAndConditions" />
-                            
+
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="False" CommandName="EditRecord" CommandArgument='<%# Eval("Pid") %>'
                                         Text="Edit"></asp:LinkButton>
-                                </ItemTemplate> 
+                                </ItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkDelete" runat="server" CausesValidation="False" CommandName="DeleteRecord" CommandArgument='<%# Eval("Pid") %>'
                                         Text="Delete"></asp:LinkButton>
-                                </ItemTemplate> 
+                                </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </td>
             </tr>
-        </table> <br/><br/>
-		
+        </table>
+        <br />
+        <br />
+
         <%-- Form  --%>
         <table border="1">
             <asp:HiddenField ID="hdnPid" runat="server" />
@@ -105,10 +108,13 @@
                     <asp:Label ID="lblMobileNumber" runat="server" Text="Mobile Number"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged" ValidationGroup="LoginFrame"></asp:TextBox><br />
+                    <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged" ValidationGroup="LoginFrame" AutoPostBack="true"></asp:TextBox><br />
+                                    
                 </td>
+               
                 <td>
-                    <asp:RegularExpressionValidator ID="revMoblieNumber" runat="server" ErrorMessage="Enetr the Only Number" ControlToValidate="txtMoblieNumber" 
+                    <asp:Label ID="labMobile" runat="server" ForeColor="Red" Visible="false" Text="Enter the Different number"></asp:Label>
+                    <asp:RegularExpressionValidator ID="revMoblieNumber" runat="server" ErrorMessage="Enetr the Only Number" ControlToValidate="txtMoblieNumber"
                         ValidationExpression="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" ForeColor="Red" ValidationGroup="LoginFrame" Display="Dynamic">
                     </asp:RegularExpressionValidator>
                 </td>
@@ -175,11 +181,11 @@
                     <asp:TextBox ID="txtPincode" runat="server" OnTextChanged="txtPincode_TextChanged"></asp:TextBox><br />
                 </td>
                 <td>
-                    <asp:RequiredFieldValidator ID="reqPincode" ControlToValidate="txtPincode" ValidationGroup="LoginFrame" 
+                    <asp:RequiredFieldValidator ID="reqPincode" ControlToValidate="txtPincode" ValidationGroup="LoginFrame"
                         runat="server" ForeColor="Red" ErrorMessage="Enter Pin Code" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
                 <td>
-                    <asp:RegularExpressionValidator ID="revPincode" runat="server" ErrorMessage="Enetr only 6 Digit" ControlToValidate="txtPincode" 
+                    <asp:RegularExpressionValidator ID="revPincode" runat="server" ErrorMessage="Enetr only 6 Digit" ControlToValidate="txtPincode"
                         ValidationExpression="^[1-9][0-9]{5}$" ForeColor="Red" ValidationGroup="LoginFrame" Display="Dynamic">
                     </asp:RegularExpressionValidator>
                 </td>
@@ -190,12 +196,17 @@
                     <asp:Label ID="lblDate" runat="server" Text="Date Of Brith"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="txtDate" runat="server" placeholder="mm/dd/yyyy" TextMode="Date" ReadOnly="false" ValidationGroup="LoginFrame" OnTextChanged="txtDate_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtDate" runat="server" placeholder="mm/dd/yyyy" TextMode="Date" ReadOnly="false" ValidationGroup="LoginFrame" OnTextChanged="txtDate_TextChanged" AutoPostBack="true"></asp:TextBox>
                 </td>
                 <td>
                     <asp:RequiredFieldValidator ID="ReqDate" ControlToValidate="txtDate" Display="Dynamic" ValidationGroup="LoginFrame"
                         runat="server" ForeColor="Red" ErrorMessage="Enter Date"></asp:RequiredFieldValidator>
+                    <asp:Label ID="lblAge18" runat="server" ForeColor="Red" Visible="false" Text="Age should be more than 18."></asp:Label>
                 </td>
+                <%--<td>
+                    <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Age must be between 18 to 40"  Display="Dynamic"
+                        ControlToValidate="txtDate" ForeColor="Red" MaximumValue="40" MinimumValue="18" ValidationGroup="LoginFrame"></asp:RangeValidator>  
+                </td>--%>
             </tr>
 
             <tr>
@@ -229,7 +240,7 @@
                         <asp:ListItem>Writing</asp:ListItem>
                     </asp:CheckBoxList>
                 </td>
-                
+
             </tr>
 
             <tr>
@@ -237,13 +248,13 @@
                     <asp:CheckBox ID="chkIsTermsAccept" runat="server" Text="I Agree with this from" OnCheckedChanged="chkIsTermsAccept_CheckedChanged"
                         AutoPostBack="true" />
                 </td>
-                
+
             </tr>
 
             <tr>
                 <td colspan="2" style="text-align: center; align-items: center; align-content: center; align-self: center;">
                     <asp:Button ID="btnSubmit" runat="server" Text="Sumbit" OnClick="btnSubmit_Click" Style="height: 26px" ValidationGroup="LoginFrame" />
-                    <asp:Button ID="btnUpDate" runat="server" Text="Update" OnClick="btnUpDate_Click" Style="height: 26px" ValidationGroup="LoginFrame"/>
+                    <asp:Button ID="btnUpDate" runat="server" Text="Update" OnClick="btnUpDate_Click" Style="height: 26px" ValidationGroup="LoginFrame" />
                 </td>
             </tr>
         </table>
