@@ -87,6 +87,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revFirstName;
 
         /// <summary>
+        /// rgvFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rgvFirstName;
+
+        /// <summary>
         /// lblMidd control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revMiddleName;
+
+        /// <summary>
+        /// rgvMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rgvMiddleName;
 
         /// <summary>
         /// lblLastName control.
@@ -141,6 +159,15 @@ namespace Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqLastName;
 
         /// <summary>
+        /// rgvLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rgvLastName;
+
+        /// <summary>
         /// lblMobileNumber control.
         /// </summary>
         /// <remarks>
@@ -157,6 +184,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMoblieNumber;
+
+        /// <summary>
+        /// reqMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqMobile;
 
         /// <summary>
         /// labMobile control.
@@ -202,6 +238,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqAddress;
+
+        /// <summary>
+        /// regAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regAddress;
 
         /// <summary>
         /// ddlCountry control.

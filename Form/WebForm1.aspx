@@ -37,11 +37,11 @@
                             </asp:BoundField>
 
                             <asp:BoundField DataField="MoblieNumber" HeaderText="MoblieNumber">
-                                <ItemStyle HorizontalAlign="Center" />
+                                <ItemStyle HorizontalAlign="Left" />
                             </asp:BoundField>
 
                             <asp:BoundField DataField="Address" HeaderText="Address">
-                                <ItemStyle HorizontalAlign="Center" />
+                                <ItemStyle HorizontalAlign="Left" />
                             </asp:BoundField>
 
                             <asp:BoundField DataField="Country" HeaderText="Country">
@@ -66,7 +66,9 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
-                            
+                            <asp:BoundField DataField="Hobbies" HeaderText="Hobbies">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
 
                             <asp:TemplateField HeaderText="TermsAndConditions">
                                 <ItemTemplate>
@@ -76,18 +78,20 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
 
-                            <asp:TemplateField ShowHeader="False">
+                            <asp:TemplateField ShowHeader="False" HeaderText="Edit">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="False" CommandName="EditRecord" CommandArgument='<%# Eval("Pid") %>'
                                         Text="Edit"></asp:LinkButton>
                                 </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
 
-                            <asp:TemplateField ShowHeader="False">
+                            <asp:TemplateField ShowHeader="False" HeaderText="Delete">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkDelete" runat="server" CausesValidation="False" CommandName="DeleteRecord" CommandArgument='<%# Eval("Pid") %>'
                                         Text="Delete"></asp:LinkButton>
                                 </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
@@ -110,10 +114,12 @@
                 <td>
                     <asp:RequiredFieldValidator ID="reqFirstName" ControlToValidate="txtFirstName" Display="Dynamic" ValidationGroup="LoginFrame"
                         runat="server" ErrorMessage="Enter Firstname" ForeColor="Red"></asp:RequiredFieldValidator>
-                </td>
-                <td>
+
                     <asp:RegularExpressionValidator ID="revFirstName" ValidationGroup="LoginFrame" Display="Dynamic" ValidationExpression="(^[A-Z a-z]*$)"
                         ControlToValidate="txtFirstName" runat="server" ForeColor="Red" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
+
+                    <asp:RegularExpressionValidator ID="rgvFirstName" Display="Dynamic" ControlToValidate="txtFirstName" ValidationGroup="LoginFrame"
+                        ValidationExpression="^[\s\S]{0,50}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 50 characters allowed."></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -127,6 +133,8 @@
                 <td>
                     <asp:RegularExpressionValidator ID="revMiddleName" ValidationGroup="LoginFrame" Display="Dynamic" ValidationExpression="(^[A-Z a-z]*$)"
                         ControlToValidate="txtMiddleName" runat="server" ForeColor="Red" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="rgvMiddleName" Display="Dynamic" ControlToValidate="txtMiddleName" ValidationGroup="LoginFrame"
+                        ValidationExpression="^[\s\S]{0,50}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 50 characters allowed."></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -141,6 +149,8 @@
                 <td>
                     <asp:RequiredFieldValidator ID="ReqLastName" ControlToValidate="txtLastName" Display="Dynamic" ValidationGroup="LoginFrame"
                         runat="server" ForeColor="Red" ErrorMessage="Enter Lastname"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="rgvLastName" Display="Dynamic" ControlToValidate="txtLastName" ValidationGroup="LoginFrame"
+                        ValidationExpression="^[\s\S]{0,50}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 50 characters allowed."></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -150,11 +160,13 @@
                 </td>
                 <td>
                     <asp:TextBox ID="txtMoblieNumber" runat="server" OnTextChanged="txtMoblieNumber_TextChanged" ValidationGroup="LoginFrame" AutoPostBack="true"></asp:TextBox><br />
-
                 </td>
 
                 <td>
+                    <asp:RequiredFieldValidator ID="reqMobile" ControlToValidate="txtMoblieNumber" Display="Dynamic" ValidationGroup="LoginFrame"
+                        runat="server" ForeColor="Red" ErrorMessage="Enter Mobile Number"></asp:RequiredFieldValidator>
                     <asp:Label ID="labMobile" runat="server" ForeColor="Red" Visible="false" Text="Enter the Different number"></asp:Label>
+
                     <asp:RegularExpressionValidator ID="revMoblieNumber" runat="server" ErrorMessage="Enetr the Only Number" ControlToValidate="txtMoblieNumber"
                         ValidationExpression="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" ForeColor="Red" ValidationGroup="LoginFrame" Display="Dynamic">
                     </asp:RegularExpressionValidator>
@@ -171,6 +183,9 @@
                 <td>
                     <asp:RequiredFieldValidator ID="ReqAddress" ControlToValidate="txtAddress" Display="Dynamic" ValidationGroup="LoginFrame"
                         runat="server" ForeColor="Red" ErrorMessage="Enter Address"></asp:RequiredFieldValidator>
+
+                    <asp:RegularExpressionValidator ID="regAddress" Display="Dynamic" ControlToValidate="txtAddress" ValidationGroup="LoginFrame"
+                        ValidationExpression="^[\s\S]{0,}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 200 characters allowed."></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
@@ -224,8 +239,7 @@
                 <td>
                     <asp:RequiredFieldValidator ID="reqPincode" ControlToValidate="txtPincode" ValidationGroup="LoginFrame"
                         runat="server" ForeColor="Red" ErrorMessage="Enter Pin Code" Enabled="true" Display="Dynamic"></asp:RequiredFieldValidator>
-                </td>
-                <td>
+
                     <asp:RegularExpressionValidator ID="revPincode" runat="server" ErrorMessage="Enetr only 6 Digit" ControlToValidate="txtPincode"
                         ValidationExpression="^[1-9][0-9]{5}$" ForeColor="Red" ValidationGroup="LoginFrame" Display="Dynamic">
                     </asp:RegularExpressionValidator>
@@ -280,8 +294,7 @@
 
                 </td>
                 <td>
-                    <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true" OnServerValidate="cblHobbies_SelectedIndexChanged"
-                        ClientValidationFunction="CheckBoxRequired_ClientValidate" Display="Dynamic" ValidationGroup="LoginFrame"></asp:CustomValidator>
+                    <asp:CustomValidator runat="server" ID="CheckBoxRequired" OnServerValidate="cblHobbies_SelectedIndexChanged" Display="Dynamic" ValidationGroup="LoginFrame"></asp:CustomValidator>
 
                     <asp:Label ID="lblHobbie" runat="server" ForeColor="Red" Visible="false" Text="Minimun 3 Selected" AutoPostBack="True"></asp:Label>
                 </td>
