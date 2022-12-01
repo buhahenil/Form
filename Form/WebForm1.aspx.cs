@@ -270,6 +270,7 @@ namespace Form
 
             //string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text))  
             cmd.Parameters.AddWithValue("@Hobbies", result);   */
+            
             cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
