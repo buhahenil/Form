@@ -24,15 +24,6 @@ namespace Form
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnAddnew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddnew;
-
-        /// <summary>
         /// grvDataDisplay control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvDataDisplay;
+
+        /// <summary>
+        /// btnAddnew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddnew;
 
         /// <summary>
         /// hdnPid control.
@@ -157,6 +157,15 @@ namespace Form
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqLastName;
+
+        /// <summary>
+        /// revLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revLastName;
 
         /// <summary>
         /// rgvLastName control.

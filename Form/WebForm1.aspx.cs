@@ -164,7 +164,7 @@ namespace Form
                 // Go back to the year in which the person was born in case of a leap year
                 if (Convert.ToDateTime(txtDate.Text).Date > today.AddYears(-age)) age--;
 
-                if (age < 18)
+                if (age < 18 || age > 200)
                 {
                     lblAge18.Visible = true;
                 }
@@ -181,7 +181,7 @@ namespace Form
         }
 
         protected void cblHobbies_SelectedIndexChanged(object sender, EventArgs e)
-        {   
+        {
             //validetion
             int selectedCnt = 0;
             for (int i = 0; i < cblHobbies.Items.Count; i++)
@@ -219,7 +219,7 @@ namespace Form
         }
         // data insert 
         protected void btnSubmit_Click(object sender, EventArgs e)
-        {   
+        {
             //validetion for date of brithday and Moblie and Hobbie
             if (lblAge18.Visible || lblHobbie.Visible)
             {
@@ -229,7 +229,7 @@ namespace Form
             {
                 return;
             }
-            
+
             SqlConnection db = new SqlConnection(connectionString);
             string insert = "sppersonCrud";
             db.Open();
@@ -246,6 +246,30 @@ namespace Form
             cmd.Parameters.AddWithValue("@DateOfBrith", txtDate.Text);
             cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@Hobbies", string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text)));
+            
+            //this code is sem work insert HOBBIES
+            /*cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text);
+
+            string result = string.Empty;
+
+            for (int i = 0; i < cblHobbies.Items.Count; i++)
+            {
+                if (cblHobbies.Items[i].Selected)
+                {
+                    if (string.IsNullOrWhiteSpace(result))
+                    {
+                        result += cblHobbies.Items[i].Text;
+                    }
+                    else
+                    {
+                        result += ("," + cblHobbies.Items[i].Text);
+                    }
+                }
+            }
+
+
+            //string.Join(",", cblHobbies.Items.OfType<ListItem>().Where(r => r.Selected).Select(r => r.Text))  
+            cmd.Parameters.AddWithValue("@Hobbies", result);   */
             cmd.Parameters.AddWithValue("@TermsAndConditions", chkIsTermsAccept.Checked);
             cmd.Parameters.AddWithValue("@DMLFlag", "I");
             cmd.CommandType = CommandType.StoredProcedure;
@@ -321,6 +345,7 @@ namespace Form
             DataTable dt = new DataTable();
             DataSet ds = new DataSet();
             cmd.Parameters.AddWithValue("@Pid", Pid);
+            //cmd.Parameters.AddWithValue("@PRID", PRId);
             sda.Fill(dt);
             con.Close();
             if (dt.Rows.Count > 0)
@@ -366,6 +391,8 @@ namespace Form
                     }
                 }
             }
+
+            chkIsTermsAccept.Checked = Convert.ToBoolean(row["TermsAndConditions"]);
             //-----------
         }
 

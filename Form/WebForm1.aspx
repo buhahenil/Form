@@ -12,15 +12,18 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Button ID="btnAddnew" runat="server" Text="Addnew" OnClick="btnAddnew_Click" />
-        <br />
-        <br />
+        
         <table>
             <tr>
                 <td>
-                    <asp:GridView ID="grvDataDisplay" runat="server" AutoGenerateColumns="False" EmptyDataText="No record found" OnRowCommand="grvDataDisplay_RowCommand">
+                    <asp:GridView ID="grvDataDisplay" runat="server" AutoGenerateColumns="False" EmptyDataText="No record found" OnRowCommand="grvDataDisplay_RowCommand" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical">
+                        <AlternatingRowStyle BackColor="#DCDCDC" />
                         <Columns>
                             <asp:BoundField DataField="Pid" HeaderText="Pid">
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:BoundField>
+
+                            <asp:BoundField DataField="PRID" HeaderText="Prid">
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
@@ -32,7 +35,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
-                            <asp:BoundField DataField="LastName" HeaderText="LastName">
+                            <asp:BoundField DataField="LastName" HeaderText="LastName" ItemStyle-Width="50px">
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
@@ -40,7 +43,7 @@
                                 <ItemStyle HorizontalAlign="Left" />
                             </asp:BoundField>
 
-                            <asp:BoundField DataField="Address" HeaderText="Address">
+                            <asp:BoundField DataField="Address" HeaderText="Address" >
                                 <ItemStyle HorizontalAlign="Left" />
                             </asp:BoundField>
 
@@ -48,11 +51,11 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
-                            <asp:BoundField DataField="State" HeaderText="State">
+                            <asp:BoundField DataField="State" HeaderText="State" >
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
-                            <asp:BoundField DataField="City" HeaderText="City">
+                            <asp:BoundField DataField="City" HeaderText="City" >
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
 
@@ -94,13 +97,24 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                         </Columns>
+                        <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                        <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
+                        <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                        <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                        <SortedDescendingHeaderStyle BackColor="#000065" />
                     </asp:GridView>
                 </td>
             </tr>
         </table>
         <br />
         <br />
-
+        <asp:Button ID="btnAddnew" runat="server" Text="Add New" OnClick="btnAddnew_Click" />
+        <br />
+        <br />
         <%-- Form  --%>
         <table border="1">
             <asp:HiddenField ID="hdnPid" runat="server" />
@@ -149,6 +163,8 @@
                 <td>
                     <asp:RequiredFieldValidator ID="ReqLastName" ControlToValidate="txtLastName" Display="Dynamic" ValidationGroup="LoginFrame"
                         runat="server" ForeColor="Red" ErrorMessage="Enter Lastname"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="revLastName" ValidationGroup="LoginFrame" Display="Dynamic" ValidationExpression="(^[A-Z a-z]*$)"
+                        ControlToValidate="txtLastName" runat="server" ForeColor="Red" ErrorMessage="Enter the Only alphabets"></asp:RegularExpressionValidator>
                     <asp:RegularExpressionValidator ID="rgvLastName" Display="Dynamic" ControlToValidate="txtLastName" ValidationGroup="LoginFrame"
                         ValidationExpression="^[\s\S]{0,50}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 50 characters allowed."></asp:RegularExpressionValidator>
                 </td>
@@ -185,7 +201,7 @@
                         runat="server" ForeColor="Red" ErrorMessage="Enter Address"></asp:RequiredFieldValidator>
 
                     <asp:RegularExpressionValidator ID="regAddress" Display="Dynamic" ControlToValidate="txtAddress" ValidationGroup="LoginFrame"
-                        ValidationExpression="^[\s\S]{0,}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 200 characters allowed."></asp:RegularExpressionValidator>
+                        ValidationExpression="^[\s\S]{0,200}$" runat="server" ForeColor="Red" ErrorMessage="Maximum 200 characters allowed."></asp:RegularExpressionValidator>
                 </td>
             </tr>
 
